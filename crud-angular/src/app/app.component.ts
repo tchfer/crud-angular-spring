@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'crud-angular';
+
+  @HostBinding('class') className = '';
+
+  public toggleControl= new FormControl(false);
+
+  ngOnInit(): void {
+    this.toggleControl.valueChanges.subscribe(val => {
+      this.className = val ? 'dark-mode' : '';
+    });
+  }
 }
